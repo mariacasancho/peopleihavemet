@@ -11,7 +11,9 @@
     "antd": "^4.7.2",
     "firebase": "^7.24.0",
     "firebase-admin": "^9.3.0",
+    "leaflet-geosearch": "^3.0.6",
     "next": "9.5.4",
+    "opencage-api-client": "^0.9.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "swr": "^0.2.2"
