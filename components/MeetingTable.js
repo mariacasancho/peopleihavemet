@@ -2,16 +2,18 @@ import React from 'react';
 import { Table } from 'antd';
 
 const MeetingTable = ({ meetings }) => {
-    console.log(meetings);
     const columns = [
         {
             title: 'Person',
             dataIndex: 'person',
         },
-
         {
             title: 'Date',
             dataIndex: 'date',
+        },
+        {
+            title: 'Location',
+            dataIndex: 'location_name',
         },
     ];
 
