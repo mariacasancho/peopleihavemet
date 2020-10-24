@@ -1,5 +1,8 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
+import 'antd/dist/antd.css';
+
+import { Button } from 'antd';
 import { useAuth } from '../lib/auth';
 
 export default function Home() {
@@ -16,7 +19,9 @@ export default function Home() {
 
         {auth.user ?
           (
-            <button onClick={(e) => auth.signout()}> sign out</button>
+            <Button href="/dashboard">
+              View dashboard
+        </Button>
           ) :
           (
             <button onClick={(e) => auth.signin()}> sign in</button>
