@@ -1,8 +1,8 @@
 import React from 'react';
 import { Layout, Button, Avatar } from 'antd';
-import AddMeeting from './AddMeeting';
 
 import { useAuth } from '../lib/auth';
+import AddMeeting from './AddMeeting';
 
 const DashboardShell = ({ children }) => {
     const { user, signout } = useAuth();
@@ -11,9 +11,8 @@ const DashboardShell = ({ children }) => {
     return (
         <Layout className="layout">
             <Header>
-
                 <AddMeeting />
-                <Button variant="ghost" mr={2} onClick={() => signout()}>
+                <Button onClick={() => signout()}>
                     Log Out
                 </Button>
                 <Avatar size="sm" src={user.photoUrl} />

@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Button, Modal, Form, Input, DatePicker } from "antd";
+import { mutate } from 'swr';
+import { Alert, Button, Modal, Form, Input, DatePicker, notification } from "antd";
+import { DeleteOutlined, SearchOutlined } from "@ant-design/icons";
 
 import fetcher from "../utils/fetcher";
-
-import { DeleteOutlined, SearchOutlined } from "@ant-design/icons";
 import { createMeeting } from "../lib/db";
 
 const ResultDisplayer = ({ results, handleOnClick, visible }) => {
@@ -21,6 +21,7 @@ const ResultDisplayer = ({ results, handleOnClick, visible }) => {
 
 const AddMeeting = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [hasErrors, setHasErrors] = useState(false);
     const [results, setResults] = useState([]);
     const [locationToSearch, setLocationToSearch] = useState("");
     const [locationSelected, setLocationSelected] = useState(null);
@@ -36,6 +37,7 @@ const AddMeeting = () => {
         setResults([]);
         form.resetFields();
         setIsOpen(false);
+        setHasErrors(false);
     };
 
     const onCreateMeeting = (fieldsValue) => {
@@ -47,6 +49,17 @@ const AddMeeting = () => {
             date: fieldsValue["date"].format("YYYY-MM-DD HH:mm"),
         };
         createMeeting(values);
+        notification.open({
+            message: 'Meeting added',
+            duration: 2,
+        });
+        mutate(
+            '/api/meetings',
+            async (data) => {
+                return { meetings: [...data.meetings, values] };
+            },
+            false
+        );
         onClose();
     };
 
@@ -73,7 +86,7 @@ const AddMeeting = () => {
 
     return (
         <>
-            <Button fontWeight="medium" maxW="200px" onClick={onOpen}>
+            <Button onClick={onOpen}>
                 Add Your Meeting
             </Button>
             <Modal
@@ -86,8 +99,8 @@ const AddMeeting = () => {
                             form.resetFields();
                             onCreateMeeting(values);
                         })
-                        .catch((info) => {
-                            console.log("Validate Failed:", info);
+                        .catch(() => {
+                            setHasErrors(true);
                         });
                 }}
                 onCancel={onClose}
@@ -100,7 +113,10 @@ const AddMeeting = () => {
                     <Form.Item name="date" label="Date">
                         <DatePicker showTime format="YYYY-MM-DD HH:mm" />
                     </Form.Item>
-                    <Form.Item label="Search location">
+                    <Form.Item
+                        label="Search location"
+                        help="write a place and click on the magnifier icon"
+                    >
                         <Input
                             type="text"
                             size="large"
@@ -110,7 +126,7 @@ const AddMeeting = () => {
                         />
                     </Form.Item>
 
-                    <div>
+                    <div className="LocationDisplayer">
                         <ResultDisplayer
                             visible={!locationSelected}
                             results={results}
@@ -129,6 +145,9 @@ const AddMeeting = () => {
                             />
                         </Form.Item>
                     )}
+                    <Form.Item hidden={!hasErrors}>
+                        <Alert message="Please fill out all information" type="error" showIcon />
+                    </Form.Item>
                 </Form>
             </Modal>
         </>
