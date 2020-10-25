@@ -96,7 +96,7 @@ const MeetingTable = ({ meetings }) => {
         },
     ];
 
-    return <Table columns={columns} dataSource={meetings} />;
+    return <Table rowKey={meetings => meetings.id} columns={columns} dataSource={meetings} />;
 };
 
 export default MeetingTable;

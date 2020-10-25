@@ -1,13 +1,13 @@
 
 import useSWR from 'swr';
+import 'antd/dist/antd.css';
+
 import { useAuth } from '../lib/auth';
 import EmptyState from '../components/EmptyState';
 import DashboardShell from '../components/DashboardShell';
+import MeetingTable from '../components/MeetingTable';
 
 import fetcher from '../utils/fetcher';
-
-import 'antd/dist/antd.css';
-import MeetingTable from '../components/MeetingTable';
 
 const Dashboard = () => {
     const auth = useAuth();
