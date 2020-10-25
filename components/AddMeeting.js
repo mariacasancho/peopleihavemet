@@ -75,7 +75,7 @@ const AddMeeting = () => {
         <>
             <Button fontWeight="medium" maxW="200px" onClick={onOpen}>
                 Add Your Meeting
-      </Button>
+            </Button>
             <Modal
                 visible={isOpen}
                 title="Add Meeting"

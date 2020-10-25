@@ -15,7 +15,7 @@ const DashboardShell = ({ children }) => {
                 <AddMeeting />
                 <Button variant="ghost" mr={2} onClick={() => signout()}>
                     Log Out
-            </Button>
+                </Button>
                 <Avatar size="sm" src={user.photoUrl} />
             </Header>
             <Content style={{ padding: '0 50px' }}>
