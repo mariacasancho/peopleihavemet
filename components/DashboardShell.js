@@ -12,7 +12,7 @@ const DashboardShell = ({ children }) => {
         <Layout className="layout">
             <Header>
 
-                <AddMeeting />
+                {/* <AddMeeting /> */}
                 <Button variant="ghost" mr={2} onClick={() => signout()}>
                     Log Out
             </Button>
