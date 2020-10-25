@@ -12,10 +12,10 @@ const DashboardShell = ({ children }) => {
         <Layout className="layout">
             <Header>
 
-                {/* <AddMeeting /> */}
+                <AddMeeting />
                 <Button variant="ghost" mr={2} onClick={() => signout()}>
                     Log Out
-            </Button>
+                </Button>
                 <Avatar size="sm" src={user.photoUrl} />
             </Header>
             <Content style={{ padding: '0 50px' }}>
